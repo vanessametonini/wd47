@@ -11,6 +11,16 @@
         cartoes[j].addEventListener('focusout', function() {
             cartoes[j].classList.remove('cartao--focado')
         })
+
+        cartoes[j].addEventListener('change', function mudaCor(event) {
+            const elementoSelecionado = event.target
+            const isRadioTipo = elementoSelecionado.classList.contains('opcoesDoCartao-radioTipo')
+
+            if(isRadioTipo){
+                cartoes[j].style.backgroundColor = elementoSelecionado.value
+            }
+
+        })
     }
     
 })()
