@@ -27,6 +27,17 @@
                 event.target.click()
             }
         })
+
+        cartoes[j].addEventListener('click', function () {
+            const elementoSelecionado = event.target
+
+            if (elementoSelecionado.classList.contains('opcoesDoCartao-remove')) {
+                cartoes[j].classList.add('cartao--some')
+                cartoes[j].addEventListener('transitionend', function (params) {
+                    cartoes[j].remove()
+                })
+            }
+        })
     }
     
 })()
