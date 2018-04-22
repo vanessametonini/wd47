@@ -3,12 +3,12 @@
 
     btnAjuda.addEventListener('click', function(){
         const ajudas = [
-            'Bem vinde ao Ceep'
-            ,'Clique no botão linhas para mudar o layout'
+            { conteudo: 'Bem vinde ao Ceep', cor: '#f05450'}
+            ,{ conteudo: 'Clique no botão linhas para mudar o layout', cor: '#92C4EC'}
         ]
 
         ajudas.forEach(function(ajuda) {
-            alert(ajuda)
+            adicionaCartaoNoMural(ajuda)
         })
     })
 
