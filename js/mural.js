@@ -1,10 +1,13 @@
-let numeroDoCartao = 0
+(function(){
+    'use strict'
 
-function adicionaCartaoNoMural(cartaoObj) {
-    numeroDoCartao++
-    const conteudoDoCartao = cartaoObj.conteudo
-    
-    const cartao = $(`
+    let numeroDoCartao = 0
+
+    window.adicionaCartaoNoMural = function (cartaoObj) {
+        numeroDoCartao++
+        const conteudoDoCartao = cartaoObj.conteudo
+
+        const cartao = $(`
                 <article tabindex="0" id="cartao_${numeroDoCartao}" class="cartao" style="background-color:${cartaoObj.cor}">
                     <div class="opcoesDoCartao">
                     <button class="opcoesDoCartao-remove opcoesDoCartao-opcao" tabindex="0">
@@ -34,36 +37,37 @@ function adicionaCartaoNoMural(cartaoObj) {
                     <p class="cartao-conteudo" contenteditable tabindex="0">${conteudoDoCartao}</p>
                 </article>
                 `)
-    
-    cartao.on('focusin', function () {
-        cartao.addClass('cartao--focado')
-    })
-    
-    cartao.on('focusout', function () {
-        cartao.removeClass('cartao--focado')
-    })
-    
-    cartao.on('change', '.opcoesDoCartao-radioTipo', function mudaCor(event) {
-        cartao.css('background-color', event.target.value)
-    })
-    
-    cartao.on('keydown', function deixaClicarComEnter(event) {
-        if (event.target.classList.contains('opcoesDoCartao-opcao') && (event.key === 'Enter' || event.key === ' ')) {
-            event.target.click()
-        }
-    })
-    
-    cartao.on('click', function (event) {
-        const elementoSelecionado = event.target
-    
-        if (elementoSelecionado.classList.contains('opcoesDoCartao-remove')) {
-            cartao.addClass('cartao--some')
-    
-            cartao.on('transitionend', function () {
-                cartao.remove()
-            })
-        }
-    })
-    
-    $('.mural').append(cartao)
-}
+
+        cartao.on('focusin', function () {
+            cartao.addClass('cartao--focado')
+        })
+
+        cartao.on('focusout', function () {
+            cartao.removeClass('cartao--focado')
+        })
+
+        cartao.on('change', '.opcoesDoCartao-radioTipo', function mudaCor(event) {
+            cartao.css('background-color', event.target.value)
+        })
+
+        cartao.on('keydown', function deixaClicarComEnter(event) {
+            if (event.target.classList.contains('opcoesDoCartao-opcao') && (event.key === 'Enter' || event.key === ' ')) {
+                event.target.click()
+            }
+        })
+
+        cartao.on('click', function (event) {
+            const elementoSelecionado = event.target
+
+            if (elementoSelecionado.classList.contains('opcoesDoCartao-remove')) {
+                cartao.addClass('cartao--some')
+
+                cartao.on('transitionend', function () {
+                    cartao.remove()
+                })
+            }
+        })
+
+        $('.mural').append(cartao)
+    }
+})()
