@@ -43,4 +43,18 @@
 
         $('.mural').append(cartao);
     };
+
+    $.ajax({
+        url: 'https://ceep.herokuapp.com/cartoes/carregar',
+        method: 'GET',
+        data: { usuario: 'vanessa.tonini@caelum.com.br' },
+        dataType: 'jsonp',
+        success: function success(objeto) {
+
+            var cartoes = objeto.cartoes;
+            cartoes.forEach(function (cartao) {
+                adicionaCartaoNoMural(cartao);
+            });
+        }
+    });
 })();
